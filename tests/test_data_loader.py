@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from data_loader import load_stock_data
+from load_stock_data import load_stock_data
 
 def create_test_csv(path, rows=20):
     # Minimal valid CSV for testing
