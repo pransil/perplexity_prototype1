@@ -36,14 +36,14 @@ def test_missing_columns(tmp_path):
     file = tmp_path / "tesla.csv"
     df.to_csv(file, index=False)
     with pytest.raises(ValueError):
-        load_stock_data(str(file))
+        load_stock_data()
 
 def test_too_short(tmp_path):
     df = pd.DataFrame({'open': [1,2], 'close': [1,2]})
     file = tmp_path / "tesla.csv"
     df.to_csv(file, index=False)
     with pytest.raises(ValueError):
-        load_stock_data(str(file))
+        load_stock_data()
 
 def test_nan_handling(tmp_path):
     df = pd.DataFrame({'open': [1, np.nan, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -51,7 +51,7 @@ def test_nan_handling(tmp_path):
     file = tmp_path / "tesla.csv"
     df.to_csv(file, index=False)
     # Should not raise, but may produce NaNs in output
-    open_prices, close_prices, X, y = load_stock_data(str(file))
+    open_prices, close_prices, X, y = load_stock_data()
     assert np.isnan(open_prices).sum() == 1
     assert np.isnan(X).any()
 
